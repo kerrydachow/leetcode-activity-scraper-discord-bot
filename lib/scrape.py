@@ -11,6 +11,7 @@ def scrape_user_profile(user: User):
     :param user: LeetCode user
     :return: LeetCode user information
     """
+    print(f"Executing scrape for: {user.username}...")
     profile = "https://leetcode.com/" + user.username
     page = requests.get(profile)
     soup = BeautifulSoup(page.text, features="html.parser")
