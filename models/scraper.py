@@ -6,7 +6,13 @@ import concurrent.futures
 
 
 class Scraper:
-    def scrape_concurrently(self, users: [User]):
+    def scrape_concurrently(self, users: [User]) -> None:
+        """
+        Scrape user profile information concurrently.
+
+        :param users: list of LeetCode users
+        :return: None
+        """
         with concurrent.futures.ThreadPoolExecutor() as executor:
             profiles = executor.map(self.scrape_user_profile, users)
             counter = 0
@@ -14,7 +20,7 @@ class Scraper:
                 users[counter].scraped_profile = profile
                 counter += 1
 
-    def scrape_user_profile(self, user: User):
+    def scrape_user_profile(self, user: User) -> json:
         """
         Scrape user profile information.
 
@@ -27,7 +33,7 @@ class Scraper:
         soup = BeautifulSoup(page.text, features="html.parser")
         return json.loads(soup.find('script', type="application/json").string)
 
-    def filter_submission_calendar(self, data: json):
+    def filter_submission_calendar(self, data: json) -> list[dict]:
         """
         Filter data to find submission calendar.
 
@@ -41,7 +47,7 @@ class Scraper:
                                               "submissionCalendar"])
         return [{int(i): v} for i, v in submission_calendar.items()]
 
-    def filter_recent_submissions(self, user):
+    def filter_recent_submissions(self, user) -> list[RecentSubmission]:
         """
         Filter data to find user's recent submissions.
 
