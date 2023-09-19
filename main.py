@@ -1,12 +1,8 @@
-from models.client import Client
+from discord_bot import bot
 
 
 def main():
-    client = Client()
-    client.add_user("kerrydachow")
-    client.add_user("nickfurk")
-    client.execute_request(1)
-    client.execute_request(2)
+    bot.setup()
 
 
 if __name__ == "__main__":
