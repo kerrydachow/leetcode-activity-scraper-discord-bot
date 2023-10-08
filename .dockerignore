@@ -1,0 +1,8 @@
+.idea/
+venv/
+.DS_STORE
+.env
+.cache
+__pycache__
+preview.png
+README.md
